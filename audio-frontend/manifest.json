@@ -1,0 +1,10 @@
+{
+  "name": "Catch-Me-Up",
+  "version": "1.0",
+  "manifest_version": 3,
+  "host_permissions": ["*://*/"],
+  "permissions": ["storage", "tabs", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
