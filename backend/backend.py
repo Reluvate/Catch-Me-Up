@@ -12,8 +12,27 @@ ai21.api_key = "XFH1V0mQnGohm79g5NXvn87AERqXRbJI"
 
 def get_transcription(url : str) -> str:
     with psycopg.connect(**conn_dict) as conn:
-            # get text from url in database
-            pass
+        # Open a cursor to perform database operations
+        with conn.cursor() as cur:
+
+            # Execute a command: this creates a new table
+            cur.execute("""
+                SELECT transcripts.sentence FROM transcripts 
+                    INNER JOIN session ON session.session_id = transcripts.session_id
+                    WHERE session_url = %s
+                """,
+                (url))
+
+            cur.fetchmany()
+            # will return (1, 100, "abc'def")
+
+            # You can use `cur.fetchmany()`, `cur.fetchall()` to return a list
+            # of several records, or even iterate on the cursor
+            for record in cur:
+                return record
+
+            # Make the changes to the database persistent
+            conn.commit()
 
 @app.route('/summarize', methods=["POST"])
 def answer():
