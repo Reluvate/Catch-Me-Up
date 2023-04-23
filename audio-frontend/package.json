@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@google-cloud/speech": "^5.4.1"
+  }
+}
