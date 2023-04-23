@@ -12,6 +12,8 @@ navigator.mediaDevices
     const audioContext = new AudioContext();
     const mixed = mix(audioContext, [stream, micStream]);
     const recorder = new MediaRecorder(mixed, { mimeType: "audio/webm" });
+    // #TODO by timmy: pipe this recorder into GCP STT API and return the transcript
+
     // Further code here
     socket = new WebSocket("wss://api.deepgram.com/v1/listen?tier=enhanced", [
       "token",
