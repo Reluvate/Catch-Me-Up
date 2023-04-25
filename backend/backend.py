@@ -45,11 +45,12 @@ def answer():
         try:
             summary = ai21.Summarize.execute(
                 source=transcript
+                sourceType="TEXT"
             )
         except Exception as e:
             return {"status" : 0, "error": f"{type(e)} {e}"}
         
-        return {"answer": summary, "status": 1}
+        return {"answer": summary["summary"], "status": 1}
     
     else:
         pass
@@ -64,12 +65,14 @@ def answer():
         transcript = get_transcription(url)
         try:
             segmented = ai21.Segmentation.execute(
-                source=transcript
+                source=transcript,
+                sourceType="TEXT"
             )
+            segmented = segmented["segments"]
         except Exception as e:
             return {"status" : 0, "error": f"{type(e)} {e}"}
         
-        return {"answer": segmented, "status": 1}
+        return {"answer": [i["segmentText"] for i in segmented], "status": 1}
     
     else:
         pass
@@ -83,13 +86,14 @@ def answer():
         question = data[0]
         url = request.url
         transcript = get_transcription(url)
+        headers = {"Authorization": f"Bearer {ai21.api_key}", "Content-Type": "application/json"}
         payload = {
             "context": transcript,
             "question": question
         }
         endpoint = "https://api.ai21.com/studio/v1/experimental/answer"
         try:
-            result = requests.post(endpoint, json = payload)
+            result = requests.post(endpoint, json = payload, headers=headers)
             result = result.json()
             answer = result["answer"]
         except Exception as e:
