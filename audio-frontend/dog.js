@@ -29,29 +29,6 @@ if (!videoElement) {
       }
     });
 
-    mediaRecorder.addEventListener("stop", async () => {
-      const blob = new Blob(recordedChunks, { type: "audio/webm" });
-
-      const formData = new FormData();
-      formData.append("audioFile", blob);
-
-      const response = await fetch(
-        "https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyCfn97T5S11xfMZbr8Bl0nvk5n0FCg50mA",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await response.json();
-
-      const transcription = data.results
-        .map((result) => result.alternatives[0].transcript)
-        .join("\n");
-      console.log(transcription);
-    });
-
-    mediaRecorder.start();
-
     socket = new WebSocket("wss://api.deepgram.com/v1/listen?tier=enhanced", [
       "token",
       "147ffa5b29c089bbdddd8c4155b099020ec3b3fb",
