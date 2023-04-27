@@ -44,7 +44,7 @@ def answer():
         transcript = get_transcription(url)
         try:
             summary = ai21.Summarize.execute(
-                source=transcript
+                source=transcript,
                 sourceType="TEXT"
             )
         except Exception as e:
