@@ -1,7 +1,5 @@
-
 //API KEY AIzaSyCfn97T5S11xfMZbr8Bl0nvk5n0FCg50mA
 chrome.storage.local.set({ transcript: "" });
-
 
 const videoElement = document.querySelector("video");
 
@@ -48,6 +46,16 @@ if (!videoElement) {
         chrome.storage.local.get("transcript", (data) => {
           chrome.storage.local.set({
             transcript: (data.transcript += " " + transcript),
+          });
+          fetch("http://localhost:5000/append-transcript", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              url: window.location.href,
+              stream: transcript,
+            }),
           });
 
           // Throws error when popup is closed, so this swallows the errors with catch.
