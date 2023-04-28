@@ -5,16 +5,9 @@ import ai21
 import requests
 import redis
 
-r = redis.Redis(
-    host='redis-14946.c23738.us-east-1-mz.ec2.cloud.rlrcp.com',
-    port=14946,
-    password='g9e5H3aUeAYVOKHnYDMEQoy4QidRElPR')
-
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-connection = "postgres://limzhenyang12345:joBnw8vO9kGs@ep-late-bonus-548123.ap-southeast-1.aws.neon.tech/Reluvate"
-ai21.api_key = "XFH1V0mQnGohm79g5NXvn87AERqXRbJI"
 
 
 def get_transcription(url: str) -> str:
