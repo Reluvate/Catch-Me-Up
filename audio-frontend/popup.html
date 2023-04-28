@@ -38,6 +38,16 @@
         color: #000;
       }
 
+      input {
+        color: #000;
+      }
+
+      #divider {
+        background-color: #000;
+        height: 1px;
+        width: 100%;
+      }
+
     </style>
   </head>
   <body>
@@ -50,6 +60,12 @@
         <button id="start" class="btn btn-wide rounded-lg">Start</button>
         <button id="stop" class="btn btn-wide rounded-lg">Stop</button>
         <button id="clear" class="btn btn-accent btn-wide rounded-lg">Clear transcription</button>
+      </div>
+
+      <div class = "divider"></div>
+
+      <div className="form-control w-full max-w-xs">
+          <input type="text" placeholder="Ask Relu Anything!" class="input input-bordered w-full max-w-xs " />
       </div>
     
       <div id="transcript"></div>

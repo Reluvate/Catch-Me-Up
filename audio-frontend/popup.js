@@ -19,15 +19,6 @@ document.getElementById("start").addEventListener("click", async () => {
   });
 });
 
-document.getElementById("bigstart").addEventListener("click", async () => {
-  const tab = await getCurrentTab();
-  if (!tab) return alert("Require an active tab");
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["dog.js"],
-  });
-});
-
 async function getCurrentTab() {
   const queryOptions = { active: true, lastFocusedWindow: true };
   const [tab] = await chrome.tabs.query(queryOptions);
@@ -39,10 +30,12 @@ chrome.runtime.onMessage.addListener(({ message }) => {
     console.log(showLatestTranscript());
   }
 });
+
 chrome.runtime.onMessage.addListener(({ message }) => {
   if (message == "stop") {
     socket.close();
     alert("Transcription ended");
+    console.log("message",message)
   }
 });
 
