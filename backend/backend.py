@@ -40,7 +40,7 @@ def summarise():
         #data = request.data
         #data = data.decode("utf-8")
         # data = eval(data) #data should only have one argument
-        url = request.url
+        url = request.get_json()['url']
         transcript = get_transcription(url)
         try:
             summary = ai21.Summarize.execute(
@@ -48,9 +48,9 @@ def summarise():
                 sourceType="TEXT"
             )
         except Exception as e:
-            return {"status": 0, "error": f"{type(e)} {e}"}
+            return (str(e), 400)
 
-        return {"answer": summary["summary"], "status": 1}
+        return ({'summary':summary["summary"]}, 200)
 
     else:
         pass
@@ -69,9 +69,9 @@ def segment():
             )
             segmented = segmented["segments"]
         except Exception as e:
-            return {"status": 0, "error": f"{type(e)} {e}"}
+            return (str(e), 400)
 
-        return {"answer": [i["segmentText"] for i in segmented], "status": 1}
+        return ({"answer": [i['segmentText'] for i in segmented]}, 200)
 
     else:
         pass
@@ -98,7 +98,7 @@ def questioning():
         except Exception as e:
             return (str(e), 400)
 
-        return (answer, 200)
+        return ({'answer':answer}, 200)
 
     else:
         pass
