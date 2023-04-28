@@ -1,26 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
     <title>Catch-Me-Up</title>
     <meta charset="UTF-8" />
     <style>
       /* Add any styles you want for the popup here */
-      #button-container {
+
+      body {
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        gap: 4px;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        padding: 20px;
+        font-weight: 200;
+        font-family: "Roboto", sans-serif;
       }
+
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        text-align: center;
+        font-weight: 100  ;
+        color: #000;
+      }
+
+      button {
+        margin-top: 10px ;
+      }
+
+      #transcript {
+        margin-top: 30px;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        color: #000;
+      }
+
     </style>
   </head>
   <body>
-    <div id="button-container">
-      <button id="start">Start listening</button>
-      <button id="bigstart">Tim Start listening</button>
-      <button id="stop">Stop transcription</button>
-      <button id="clear">Clear transcription</button>
-    </div>
-    <div id="transcript"></div>
-    <script src="./popup.js"></script>
+
+  
+      <img src="./icons/relu.png" alt="Logo" class="logo" width="120" height="120">
+      <p>Maximize your learning potential!</p>
+    
+      <div id="button-container">
+        <button id="start" class="btn btn-wide rounded-lg">Start</button>
+        <button id="stop" class="btn btn-wide rounded-lg">Stop</button>
+        <button id="clear" class="btn btn-accent btn-wide rounded-lg">Clear transcription</button>
+      </div>
+    
+      <div id="transcript"></div>
+      <script src="./popup.js"></script>
   </body>
 </html>
