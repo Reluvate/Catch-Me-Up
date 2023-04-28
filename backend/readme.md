@@ -14,7 +14,7 @@
 
 
 # 3. /questioning [POST]
-- Pass in question
+- You have to post a question to this endpoint
 - Gets transcript from database
 - Passes both transcript and question to ai
 - Returns the same thing as summarize
